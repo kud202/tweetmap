@@ -33,18 +33,12 @@ class StdOutListener(StreamListener):
         try:
             json_data = status._json
             if json_data['geo'] is not None:
-                print json_data['geo']
-                print json_data['text']
                 es.create(index="idx_twp2",
                           doc_type="twitter_twp",
                           id=json_data['id'],
                           body=json_data)
-            else:
-                print "No Geo"
-
-        except Exception, e:
-            print e
-            pass
+        except Exception as e:
+            print(e)
 
 
 def start():
